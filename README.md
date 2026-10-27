@@ -82,6 +82,7 @@ No code is shared with G-Helper. It does the controlling; this does the measurin
 - Power limits and fan curves go through G-Helper's own config, so G-Helper stays in charge and re-applies them on every screen-on and at startup.
 - The fan floor test restores your curves when it finishes, including on Ctrl-C.
 - No drivers, no services of its own, no network access.
+- After an NVIDIA driver update, restart G-Helper. It opens its GPU handle at startup, and a driver reinstall leaves that handle stale: the GPU temperature reading and clock offsets silently stop working until G-Helper is restarted. Clicking a mode does not fix it. Its log (`%APPDATA%\GHelper\log.txt`) shows `GET GPU CLOCKS:NVAPI_ERROR` while this is the case.
 
 ## Not covered
 
