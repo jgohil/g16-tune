@@ -1,0 +1,40 @@
+{
+  "name": "G16 2024 (GU605) - quiet at the desk, strong in games",
+  "description": "Measured on a GU605MY (Core Ultra 9 185H + RTX 4090 Laptop) in Ultimate GPU mode. Fans stay at their floor until the CPU is genuinely hot, ramp to full under sustained load, and the CPU runs a lower sustained power limit that keeps it OFF its 96C throttle point. Turbo is the plugged-in mode; Silent is used when the screen is off.",
+  "settings": {
+    "performance_1": 1,
+    "performance_0": 0,
+    "auto_apply_1": 1,
+    "fan_profile_cpu_1": "1E-46-4A-50-55-58-5C-60-00-00-14-23-37-4B-5A-64",
+    "fan_profile_gpu_1": "1E-3C-40-46-4B-50-55-5A-00-00-19-28-3C-50-5F-64",
+    "auto_apply_2": 1,
+    "fan_profile_cpu_2": "1E-46-4A-50-56-5A-5E-62-00-00-0F-19-23-2D-37-3C",
+    "fan_profile_gpu_2": "1E-3C-40-46-4C-52-58-62-00-00-0F-19-23-2D-37-3C",
+    "auto_boost_1": 1,
+    "auto_apply_power_1": 1,
+    "limit_slow_1": 65,
+    "limit_fast_1": 110,
+    "gpu_temp_1": 75
+  },
+  "explain": {
+    "performance_1": "Plugged in: Turbo (1). The firmware preset with the highest limits; the curves below make it quiet anyway.",
+    "performance_0": "On battery: Balanced (0) instead of Turbo.",
+    "auto_apply_1": "Actually apply the Turbo fan curve (G-Helper saves curves but ignores them unless this is on).",
+    "fan_profile_cpu_1": "0% until 70C (the fan sits at its ~2000 rpm floor), 20% at 74C, 100% at 96C. Flat enough that short bursts don't ramp.",
+    "fan_profile_gpu_1": "0% until 60C so the GPU fan is OFF at the desk, 25% at 64C, 100% at 90C.",
+    "auto_apply_2": "Apply the Silent curve too (used when the screen is off).",
+    "fan_profile_cpu_2": "Silent CPU: same shape, gentler, capped at 60%.",
+    "fan_profile_gpu_2": "Silent GPU: off until 60C, capped at 60%.",
+    "auto_boost_1": "Windows CPU boost: Enabled (1). 'Efficient' modes let clocks sag in CPU-bound games.",
+    "auto_apply_power_1": "Actually apply the power limits below in Turbo.",
+    "limit_slow_1": "PL1 (sustained) 65 W instead of G-Helper's 80 W fix. Counter-intuitive but measured: at 80 W this chip pins at 96C and throttles to ~2.1 GHz; at 65 W it holds ~2.7 GHz. Battlefield 6 went from 67 to 80-100 fps CPU-side.",
+    "limit_fast_1": "PL2 (burst) 110 W. Short spikes keep their headroom.",
+    "gpu_temp_1": "GPU temperature target 75C instead of 87C. In CPU-bound games the GPU has headroom to spare, and a cooler GPU takes heat off the shared heatsink. Set back to 87 for GPU-bound games."
+  },
+  "notes": [
+    "Any non-zero point in a fan curve spins that fan at its minimum (~2000 rpm). Only a true 0 stops it.",
+    "The CPU fan will not stop while the CPU is warm no matter what the curve says; in Ultimate GPU mode the CPU idles at 64-75C, so expect ~2000 rpm at the desk.",
+    "G-Helper re-applies this profile on every screen-on and at startup, and logs it in %APPDATA%\\GHelper\\log.txt.",
+    "After a thermal repaste, re-test PL1 at 80 W: a cooler heatsink may let it run there without throttling."
+  ]
+}
